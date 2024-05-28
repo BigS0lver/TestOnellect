@@ -11,9 +11,13 @@ namespace TestOnellect
         public void BubbleSort(List<int> array)
         {
             for (var i = 0; i < array.Count - 1; i++)
-                for (var j = 0; j < array.Count - i - 1; j++)
-                    if (array[j] > array[j + 1])
-                        (array[j], array[j + 1]) = (array[j + 1], array[j]);
+            for (var j = 0; j < array.Count - i - 1; j++)
+                if (array[j] > array[j + 1])
+                {
+                    var temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                }
         }
 
         public void QuickSort(List<int> array, int leftIndex, int rightIndex)
@@ -29,7 +33,9 @@ namespace TestOnellect
 
                 if (i <= j)
                 {
-                    (array[i], array[j]) = (array[j], array[i]);
+                    int temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp;
                     i++;
                     j--;
                 }
