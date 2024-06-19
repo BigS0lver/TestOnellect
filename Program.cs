@@ -8,7 +8,7 @@ namespace TestOnellect
     public class Program
     {
         private static readonly HttpClient httpClient = new();
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             try
             {
@@ -23,23 +23,20 @@ namespace TestOnellect
                 var count = r.Next(20, 101);
 
                 for (var i = 0; i < count; i++)
-                    list.Add(r.Next(-100, 100));
+                    list.Add(r.Next(-100, 101));
 
-                list.ForEach(num => Console.Write(num + " "));
-                Console.WriteLine();
+                Console.WriteLine(string.Join(" ", list));
 
                 sortMethods.RandomSort(list);
-                list.ForEach(num => Console.Write(num + " "));
-                Console.WriteLine();
+
+                Console.WriteLine(string.Join(" ", list));
 
                 StringContent jsonContent = new(
                     JsonSerializer.Serialize(list),
                     Encoding.UTF8,
                     "application/json");
 
-                using var request = new HttpRequestMessage(HttpMethod.Post, url);
-                request.Content = jsonContent;
-                using var response = httpClient.Send(request);
+                using var response = await httpClient.PostAsync(url ,jsonContent);
             }
             catch (Exception e)
             {

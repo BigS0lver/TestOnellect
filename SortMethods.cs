@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestOnellect
 {
+    
     public class SortMethods
     {
         public void BubbleSort(List<int> array)
@@ -14,6 +15,7 @@ namespace TestOnellect
             for (var j = 0; j < array.Count - i - 1; j++)
                 if (array[j] > array[j + 1])
                 {
+                    // ReSharper disable once SwapViaDeconstruction
                     var temp = array[j];
                     array[j] = array[j + 1];
                     array[j + 1] = temp;
@@ -33,6 +35,7 @@ namespace TestOnellect
 
                 if (i <= j)
                 {
+                    // ReSharper disable once SwapViaDeconstruction
                     int temp = array[i];
                     array[i] = array[j];
                     array[j] = temp;
@@ -55,7 +58,6 @@ namespace TestOnellect
         public void RandomSort(List<int> array)
         {
             SortMethod[] sortMethods = [QuickSort, BubbleSort];
-
             var r = new Random();
             var randomMethod = sortMethods[r.Next(sortMethods.Length)];
             Console.WriteLine(randomMethod.Method.Name);
